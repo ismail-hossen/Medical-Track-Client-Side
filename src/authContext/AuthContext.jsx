@@ -6,6 +6,7 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  updateProfile,
 } from "firebase/auth";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -50,6 +51,12 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  const updateUserProfile = (name) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+    });
+  };
+
   return (
     <div>
       <ThemeContext.Provider
@@ -60,6 +67,7 @@ const AuthProvider = ({ children }) => {
           user,
           loading,
           googleLogin,
+          updateUserProfile,
         }}
       >
         {children}

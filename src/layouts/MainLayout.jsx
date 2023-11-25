@@ -1,15 +1,14 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/shared/Header";
 import Footer from "../components/shared/Footer";
-import { Container } from "@mui/material";
 
 const MainLayout = () => {
   return (
-    <Container maxWidth="xl">
+    <div className="w-full max-w-[1400px] mx-auto">
       <Header />
       <Outlet />
       <Footer />
-    </Container>
+    </div>
   );
 };
 
