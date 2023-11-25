@@ -11,6 +11,7 @@ const MedicalCamp = ({ camp }) => {
     healthcareProfessionals,
     targetAudience,
     participants,
+    _id,
   } = camp || {};
 
   return (
@@ -49,7 +50,7 @@ const MedicalCamp = ({ camp }) => {
       <p>
         <span className="font-semibold">Participants:</span> {participants}
       </p>
-      <Link to={`/camp-details/${camp._id}`} className="btn">
+      <Link to={`/camp-details/${_id}`} className="btn">
         Details
       </Link>
     </div>
