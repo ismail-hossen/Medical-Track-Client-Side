@@ -33,6 +33,7 @@ const AddACamp = () => {
           author: { name: user.displayName, email: user.email },
           campName: data.campName,
           campFees: data.campFees,
+          participants: 0,
           dateTime: data.date,
           description: data.description,
           image: image,
@@ -42,21 +43,38 @@ const AddACamp = () => {
           location: data.venue,
         };
         if (res.status == 200) {
-          axiosSecure.post("/create-camp", formData).then((res) => {
-            if (res.status == 201) {
+          axiosSecure
+            .post("/create-camp", formData)
+            .then((res) => {
+              if (res.status == 201) {
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Your created camp saved",
+                  showConfirmButton: false,
+                  timer: 2000,
+                });
+                reset();
+              }
+            })
+            .catch(() => {
               Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Your created camp saved",
-                showConfirmButton: false,
-                timer: 2000,
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
               });
-              reset();
-            }
-          });
+            });
+          setLoading(false);
         }
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+        setLoading(false);
       });
-    setLoading(false);
   };
 
   return (

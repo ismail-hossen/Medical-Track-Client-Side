@@ -6,6 +6,7 @@ import CampDetails from "../pages/CampDetails";
 import Login from "../pages/Login";
 import Dashboard from "../layouts/Dashboard";
 import AddACamp from "../pages/dashboard/Organizer/AddACamp";
+import ManageCamps from "../pages/dashboard/Organizer/ManageCamps";
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +42,7 @@ export const router = createBrowserRouter([
       // organizer routes
       {
         path: "manage-camps",
-        element: <h3>manage camps</h3>,
+        element: <ManageCamps />,
       },
       {
         path: "add-a-camp",
