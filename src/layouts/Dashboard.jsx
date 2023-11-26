@@ -6,11 +6,10 @@ import { ThemeContext } from "../authContext/AuthContext";
 const Dashboard = () => {
   const location = useLocation();
   const { userRole } = useContext(ThemeContext);
-  console.log(location);
   return (
     <div className="relative min-h-screen md:flex">
       <Sidebar />
-      <div className="flex-1  md:ml-64">
+      <div className="flex-1 md:ml-64">
         <div className="p-5">
           {location?.pathname == "/dashboard" && userRole == "organizer" && (
             <h3>manage camps</h3>
