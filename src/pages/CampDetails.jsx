@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import JoinCampModal from "../components/modals/JoinCampModal";
+import { ThemeContext } from "../authContext/AuthContext";
 
 const CampDetails = ({ camp }) => {
   const {
@@ -12,10 +14,7 @@ const CampDetails = ({ camp }) => {
     targetAudience,
     participants,
   } = camp || {};
-
-  // TODO: import isOrganizer and isProfessional from auth context
-  const isOrganizer = false;
-  const isProfessional = false;
+  const { userRole } = useContext(ThemeContext);
 
   return (
     <div className="bg-white shadow-md rounded-md p-4 mb-6">
@@ -56,7 +55,7 @@ const CampDetails = ({ camp }) => {
       <button
         onClick={() => document.getElementById("my_modal_2").showModal()}
         className="btn"
-        disabled={isOrganizer || isProfessional}
+        disabled={userRole == "organizer" || userRole == "professional"}
       >
         Join Camp
       </button>

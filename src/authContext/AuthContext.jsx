@@ -11,25 +11,31 @@ import {
 import { useState } from "react";
 import { useEffect } from "react";
 import { auth } from "../config/firebase.config";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 export const ThemeContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userRole, setUserRole] = useState(null);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+        axiosSecure.get(`users/${user.email}`).then((res) => {
+          setUserRole(res.data.role);
+        });
       } else {
         setUser(null);
       }
       setLoading(false);
     });
     return () => unsubscribe();
-  }, []);
+  }, [axiosSecure]);
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -68,6 +74,7 @@ const AuthProvider = ({ children }) => {
           loading,
           googleLogin,
           updateUserProfile,
+          userRole,
         }}
       >
         {children}
