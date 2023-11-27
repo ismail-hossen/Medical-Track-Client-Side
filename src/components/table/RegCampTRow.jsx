@@ -4,9 +4,8 @@ import Button from "../button/Button";
 import TBodyCol from "./TBodyCol";
 import { useState } from "react";
 import Modal from "../modals/Modal";
-import CampUpdateForm from "../dashboard/organizer/CampUpdateForm";
 
-const TRow = ({ data, fetch }) => {
+const RegCampTRow = ({ data, fetch }) => {
   const axiosSecure = useAxiosSecure();
   const handleDelete = (id) => {
     Swal.fire({
@@ -19,8 +18,9 @@ const TRow = ({ data, fetch }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/delete-camp/${id}`).then((res) => {
-          if (res.data.deletedCount > 0) {
+        axiosSecure.delete(`/delete-reg-camp/${id}`).then((res) => {
+          console.log(res);
+          if (res.status == 204) {
             fetch();
             Swal.fire({
               title: "Deleted!",
@@ -32,18 +32,8 @@ const TRow = ({ data, fetch }) => {
       }
     });
   };
-  const {
-    campName,
-    dateTime,
-    location,
-    services,
-    professionals,
-    targetAudience,
-    description,
-    _id,
-  } = data || {};
+  const { campName, dateTime, location, campFees } = data.camp || {};
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -58,30 +48,35 @@ const TRow = ({ data, fetch }) => {
         <TBodyCol data={campName} />
         <TBodyCol data={dateTime} />
         <TBodyCol data={location} />
-        <TBodyCol data={services} />
-        <TBodyCol data={professionals} />
-        <TBodyCol data={targetAudience} />
-        <TBodyCol data={description} />
+        <TBodyCol data={campFees} />
+        <TBodyCol data={data.confirmationStatus} />
+        {data?.paymentStatus ? (
+          <TBodyCol data="Paid" />
+        ) : (
+          <TBodyCol>
+            <Button
+              onClick={openModal}
+              label="Pay"
+              className="btn btn-outline btn-sm"
+            />
+          </TBodyCol>
+        )}
         <TBodyCol>
           <Button
-            onClick={() => handleDelete(_id)}
-            label="Delete"
+            onClick={() => handleDelete(data._id)}
+            label="Cancel"
+            disabled={data?.paymentStatus}
             className="btn btn-outline btn-sm"
           />
         </TBodyCol>
-        <TBodyCol>
-          <Button
-            onClick={openModal}
-            label="Update"
-            className="btn btn-outline btn-info btn-sm"
-          />
-        </TBodyCol>
       </tr>
-      <Modal isOpen={isModalOpen} onClose={closeModal} modalTitle="Update Camp">
-        <CampUpdateForm camp={data} fetch={fetch} onClose={closeModal} />
-      </Modal>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        modalTitle="Payment"
+      ></Modal>
     </>
   );
 };
 
-export default TRow;
+export default RegCampTRow;

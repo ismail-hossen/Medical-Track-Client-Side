@@ -11,7 +11,7 @@ const JoinCampForm = ({ camp }) => {
 
   const { register, handleSubmit } = useForm();
 
-  const { campName, location, campFees, professionals, _id, dateTime } =
+  const { campName, location, campFees, professionals, _id, dateTime, author } =
     camp || {};
 
   const onSubmit = (data) => {
@@ -19,6 +19,10 @@ const JoinCampForm = ({ camp }) => {
     const formData = {
       camp: {
         id: _id,
+        organizer: {
+          name: author.name,
+          email: author.email,
+        },
         campName: data.campName,
         dateTime: dateTime,
         campFees: data.campFees,
