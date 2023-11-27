@@ -18,13 +18,14 @@ const ManageCamps = () => {
   ];
   const { user } = useContext(ThemeContext);
   const [camps, setCamps] = useState([]);
+  const [reFetch, setReFetch] = useState(false);
   useEffect(() => {
     if (user) {
       axiosSecure
-        .get(`http://localhost:5000/camps-by-organizer/${user.email}`)
+        .get(`/camps-by-organizer/${user.email}`)
         .then((data) => setCamps(data.data));
     }
-  }, [user]);
+  }, [user, reFetch]);
 
   return (
     <>
@@ -58,7 +59,13 @@ const ManageCamps = () => {
                 </thead>
                 <tbody>
                   {camps?.length > 0
-                    ? camps.map((camp) => <TRow key={camp._id} data={camp} />)
+                    ? camps.map((camp) => (
+                        <TRow
+                          key={camp._id}
+                          fetch={() => setReFetch((f) => !f)}
+                          data={camp}
+                        />
+                      ))
                     : null}
                 </tbody>
               </table>

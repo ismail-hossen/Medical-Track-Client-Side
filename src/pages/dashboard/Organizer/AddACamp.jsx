@@ -177,6 +177,9 @@ const AddACamp = () => {
                         accept="image/*"
                         hidden
                       />
+                      {errors.image && (
+                        <span className="text-red-600">Image is required</span>
+                      )}
                       <div className="bg-blue-500 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-blue-300">
                         Upload Image
                       </div>
