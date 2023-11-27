@@ -2,8 +2,9 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Button from "../button/Button";
 import TBodyCol from "./TBodyCol";
-import UpdateCampModal from "../modals/UpdateCampModal";
 import { useState } from "react";
+import Modal from "../modals/Modal";
+import CampUpdateForm from "../dashboard/organizer/CampUpdateForm";
 
 const TRow = ({ data, fetch }) => {
   const axiosSecure = useAxiosSecure();
@@ -76,12 +77,9 @@ const TRow = ({ data, fetch }) => {
           />
         </td>
       </tr>
-      <UpdateCampModal
-        isOpen={isModalOpen}
-        fetch={fetch}
-        onClose={closeModal}
-        camp={data}
-      />
+      <Modal isOpen={isModalOpen} onClose={closeModal} modalTitle="Update Camp">
+        <CampUpdateForm camp={data} fetch={fetch} onClose={closeModal} />
+      </Modal>
     </>
   );
 };

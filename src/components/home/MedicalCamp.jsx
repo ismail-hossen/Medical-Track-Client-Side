@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 
 const MedicalCamp = ({ camp }) => {
   const {
-    name,
+    campName,
     image,
-    fees,
-    dateAndTime,
-    venue,
+    campFees,
+    dateTime,
+    location,
     services,
-    healthcareProfessionals,
+    professionals,
     targetAudience,
     participants,
     _id,
@@ -18,21 +18,21 @@ const MedicalCamp = ({ camp }) => {
     <div className="bg-white shadow-md rounded-md p-4 mb-6">
       <img
         src={image}
-        alt={name}
+        alt={campName}
         className="w-full h-48 object-cover mb-4 rounded-md"
       />
 
-      <h2 className="text-lg font-semibold mb-2">{name}</h2>
+      <h2 className="text-lg font-semibold mb-2">{campName}</h2>
 
       <p>
-        <span className="font-semibold">Camp Fees:</span> {fees}
+        <span className="font-semibold">Camp Fees:</span> {campFees}
       </p>
       <p>
         <span className="font-semibold">Scheduled Date and Time:</span>{" "}
-        {dateAndTime}
+        {dateTime}
       </p>
       <p>
-        <span className="font-semibold">Venue Location:</span> {venue}
+        <span className="font-semibold">Venue Location:</span> {location}
       </p>
       <p>
         <span className="font-semibold">Specialized Services Provided:</span>{" "}
@@ -42,7 +42,7 @@ const MedicalCamp = ({ camp }) => {
         <span className="font-semibold">
           Healthcare Professionals in Attendance:
         </span>{" "}
-        {healthcareProfessionals}
+        {professionals}
       </p>
       <p>
         <span className="font-semibold">Target Audience:</span> {targetAudience}

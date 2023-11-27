@@ -7,6 +7,8 @@ import Login from "../pages/Login";
 import Dashboard from "../layouts/Dashboard";
 import AddACamp from "../pages/dashboard/Organizer/AddACamp";
 import ManageCamps from "../pages/dashboard/Organizer/ManageCamps";
+import ManageRegisteredCamps from "../pages/dashboard/Organizer/ManageRegisteredCamps";
+import RegisteredCamps from "../pages/dashboard/participant/RegisteredCamps";
 
 export const router = createBrowserRouter([
   {
@@ -50,7 +52,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "manage-registered-camps",
-        element: <h3>manage registered camps</h3>,
+        element: <ManageRegisteredCamps />,
       },
       {
         path: "organizer-profile",
@@ -59,7 +61,7 @@ export const router = createBrowserRouter([
       // participant routes
       {
         path: "registered-camps",
-        element: <h3>registered camps</h3>,
+        element: <RegisteredCamps />,
       },
       {
         path: "payment-history",

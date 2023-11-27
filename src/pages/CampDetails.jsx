@@ -1,40 +1,63 @@
-import { useContext } from "react";
-import JoinCampModal from "../components/modals/JoinCampModal";
+import { useContext, useState } from "react";
 import { ThemeContext } from "../authContext/AuthContext";
+import Modal from "../components/modals/Modal";
+import JoinCampForm from "../components/dashboard/participant/JoinCampForm";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
-const CampDetails = ({ camp }) => {
+const CampDetails = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const axiosPublic = useAxiosPublic();
+  const { campId } = useParams();
+  const { data } = useQuery({
+    queryKey: ["campById"],
+    queryFn: () => {
+      const res = axiosPublic.get(`/camp-by-id/${campId}`);
+      return res;
+    },
+  });
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const {
-    name,
+    campName,
     image,
-    fees,
-    dateAndTime,
-    venue,
+    campFees,
+    dateTime,
+    location,
     services,
-    healthcareProfessionals,
+    professionals,
     targetAudience,
     participants,
-  } = camp || {};
+  } = data?.data || {};
   const { userRole } = useContext(ThemeContext);
 
   return (
     <div className="bg-white shadow-md rounded-md p-4 mb-6">
       <img
         src={image}
-        alt={name}
+        alt={campName}
         className="w-full h-48 object-cover mb-4 rounded-md"
       />
 
       <h2 className="text-lg font-semibold mb-2">{name}</h2>
 
       <p>
-        <span className="font-semibold">Camp Fees:</span> {fees}
+        <span className="font-semibold">Camp Fees:</span> {campFees}
       </p>
       <p>
         <span className="font-semibold">Scheduled Date and Time:</span>{" "}
-        {dateAndTime}
+        {dateTime}
       </p>
       <p>
-        <span className="font-semibold">Venue Location:</span> {venue}
+        <span className="font-semibold">Venue Location:</span> {location}
       </p>
       <p>
         <span className="font-semibold">Specialized Services Provided:</span>{" "}
@@ -44,7 +67,7 @@ const CampDetails = ({ camp }) => {
         <span className="font-semibold">
           Healthcare Professionals in Attendance:
         </span>{" "}
-        {healthcareProfessionals}
+        {professionals}
       </p>
       <p>
         <span className="font-semibold">Target Audience:</span> {targetAudience}
@@ -53,13 +76,15 @@ const CampDetails = ({ camp }) => {
         <span className="font-semibold">Participants:</span> {participants}
       </p>
       <button
-        onClick={() => document.getElementById("my_modal_2").showModal()}
+        onClick={openModal}
         className="btn"
         disabled={userRole == "organizer" || userRole == "professional"}
       >
         Join Camp
       </button>
-      <JoinCampModal />
+      <Modal isOpen={isModalOpen} onClose={closeModal} modalTitle="Join Camp">
+        <JoinCampForm camp={data?.data} />
+      </Modal>
     </div>
   );
 };

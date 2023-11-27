@@ -5,18 +5,16 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import TRow from "../../../components/table/TRow";
 import THeadCols from "../../../components/table/THeadCols";
 
-const ManageCamps = () => {
+const RegisteredCamps = () => {
   const axiosSecure = useAxiosSecure();
   const tHeadData = [
     "Camp Name",
     "Date and Time",
     "Location",
-    "Services Provided",
-    "Professionals",
-    "Target Audience",
-    "Description",
-    "Delete",
-    "Update",
+    "campFees",
+    "Payment Status",
+    "Confirmation Status",
+    "Action",
   ];
   const { user } = useContext(ThemeContext);
   const [camps, setCamps] = useState([]);
@@ -65,4 +63,4 @@ const ManageCamps = () => {
   );
 };
 
-export default ManageCamps;
+export default RegisteredCamps;

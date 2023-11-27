@@ -6,7 +6,7 @@ import OrganizerProfile from "./organizer/OrganizerProfile";
 import { ThemeContext } from "../../authContext/AuthContext";
 import ParticipantProfile from "./participant/ParticipantProfile";
 import ParticipantMenu from "./menu/ParticipantMenu";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const { userRole, logout } = useContext(ThemeContext);
@@ -28,7 +28,9 @@ const Sidebar = () => {
       {/* Small Screen Navbar */}
       <div className="bg-gray-100 text-gray-800 flex justify-between md:hidden">
         <div>
-          <div className="block cursor-pointer p-4 font-bold">MedicalTrack</div>
+          <Link to="/" className="block cursor-pointer p-4 font-bold">
+            MedicalTrack
+          </Link>
         </div>
 
         <button
@@ -46,9 +48,12 @@ const Sidebar = () => {
       >
         <div>
           <div>
-            <div className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center mx-auto">
+            <Link
+              to="/"
+              className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center mx-auto"
+            >
               MedicalTrack
-            </div>
+            </Link>
           </div>
 
           {/* Nav Items */}

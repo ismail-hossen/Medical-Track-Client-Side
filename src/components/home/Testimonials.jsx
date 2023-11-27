@@ -15,7 +15,7 @@ const Testimonials = () => {
         "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     },
     {
-      id: 2,
+      id: 3,
       author: "Jane Smith",
       position: "Marketing Manager, XYZ Inc.",
       comment:
