@@ -83,7 +83,7 @@ const CampDetails = () => {
         Join Camp
       </button>
       <Modal isOpen={isModalOpen} onClose={closeModal} modalTitle="Join Camp">
-        <JoinCampForm camp={data?.data} />
+        <JoinCampForm onClose={closeModal} camp={data?.data} />
       </Modal>
     </div>
   );

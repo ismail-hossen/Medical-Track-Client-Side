@@ -1,11 +1,9 @@
 import { useContext } from "react";
 import { ThemeContext } from "../../authContext/AuthContext";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Header() {
-  const { user, logout } = useContext(ThemeContext);
-  const navigate = useNavigate();
-
+  const { user } = useContext(ThemeContext);
   const NavItems = (
     <>
       <li>
@@ -21,12 +19,6 @@ function Header() {
       </li>
     </>
   );
-
-  const handleLogout = () => {
-    logout().then(() => {
-      navigate("/");
-    });
-  };
 
   return (
     <div className="navbar bg-base-100">
@@ -67,26 +59,11 @@ function Header() {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                />
+                <Link to="/dashboard">
+                  <img alt="User Photo" src={user?.photoURL} />
+                </Link>
               </div>
             </label>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a className="justify-between">Profile</a>
-              </li>
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
-              <li>
-                <a onClick={handleLogout}>Logout</a>
-              </li>
-            </ul>
           </div>
         ) : (
           <div>

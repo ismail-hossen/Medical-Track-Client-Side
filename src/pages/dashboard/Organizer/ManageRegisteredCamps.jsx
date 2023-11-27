@@ -2,8 +2,8 @@ import { Helmet } from "react-helmet";
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../../authContext/AuthContext";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import TRow from "../../../components/table/TRow";
 import THeadCols from "../../../components/table/THeadCols";
+import ManageRegCampTRow from "../../../components/table/ManageRegCampTRow";
 
 const ManageRegisteredCamps = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,7 +22,7 @@ const ManageRegisteredCamps = () => {
   useEffect(() => {
     if (user) {
       axiosSecure
-        .get(`/camps-by-organizer/${user.email}`)
+        .get(`/reg-camps-by-organizer/${user.email}`)
         .then((data) => setCamps(data.data));
     }
   }, [user, reFetch]);
@@ -46,7 +46,7 @@ const ManageRegisteredCamps = () => {
                 <tbody>
                   {camps?.length > 0
                     ? camps.map((camp) => (
-                        <TRow
+                        <ManageRegCampTRow
                           key={camp._id}
                           fetch={() => setReFetch((f) => !f)}
                           data={camp}

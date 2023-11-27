@@ -3,16 +3,25 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { ThemeContext } from "../../../authContext/AuthContext";
+import Modal from "../../modals/Modal";
 
-const JoinCampForm = ({ camp }) => {
+const JoinCampForm = ({ camp, onClose }) => {
   const [loading, setLoading] = useState(false);
   const { user } = useContext(ThemeContext);
   const axiosSecure = useAxiosSecure();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { register, handleSubmit } = useForm();
 
   const { campName, location, campFees, professionals, _id, dateTime, author } =
     camp || {};
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const onSubmit = (data) => {
     setLoading(true);
@@ -36,15 +45,17 @@ const JoinCampForm = ({ camp }) => {
       .post("/join-camp", formData)
       .then((res) => {
         if (res.status == 201) {
+          onClose();
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "You join successfully. Now you have to pay",
+            title: "You join in the camp successfully. Now you have to pay",
             showConfirmButton: false,
             timer: 2900,
           });
         }
         setLoading(false);
+        openModal();
       })
       .catch(() => {
         Swal.fire({
@@ -166,6 +177,11 @@ const JoinCampForm = ({ camp }) => {
           Join Camp & Continue
         </button>
       </form>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        modalTitle="Payment"
+      ></Modal>
     </div>
   );
 };
