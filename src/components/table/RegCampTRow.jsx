@@ -4,7 +4,11 @@ import Button from "../button/Button";
 import TBodyCol from "./TBodyCol";
 import { useState } from "react";
 import Modal from "../modals/Modal";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import PaymentForm from "../form/PaymentForm";
 
+const stripePromise = loadStripe(import.meta.env.VITE_stripe_pk);
 const RegCampTRow = ({ data, fetch }) => {
   const axiosSecure = useAxiosSecure();
   const handleDelete = (id) => {
@@ -70,11 +74,11 @@ const RegCampTRow = ({ data, fetch }) => {
           />
         </TBodyCol>
       </tr>
-      <Modal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        modalTitle="Payment"
-      ></Modal>
+      <Modal isOpen={isModalOpen} modalTitle="Payment">
+        <Elements stripe={stripePromise}>
+          <PaymentForm onClose={closeModal} regCampInfo={data} fetch={fetch} />
+        </Elements>
+      </Modal>
     </>
   );
 };
