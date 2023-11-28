@@ -110,6 +110,15 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      // professional routes
+      {
+        path: "professional-profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);

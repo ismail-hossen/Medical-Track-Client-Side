@@ -29,7 +29,9 @@ const SignUp = () => {
     } else {
       createUser(data.email, data.password)
         .then(() => {
-          updateUserProfile(data.fullName)
+          updateUserProfile({
+            displayName: data.fullName,
+          })
             .then(() => {
               const userInfo = {
                 name: data.fullName,

@@ -1,9 +1,21 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
 import { ThemeContext } from "../../authContext/AuthContext";
+import Modal from "../../components/modals/Modal";
+import ProfileForm from "../../components/form/UpdateProfile";
 
 const Profile = () => {
   const { user, userRole } = useContext(ThemeContext);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
   return (
     <div className="flex justify-center items-center h-[95vh]">
       <Helmet>
@@ -44,7 +56,10 @@ const Profile = () => {
               </p>
 
               <div>
-                <button className="bg-[#F43F5E] px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053] block mb-1">
+                <button
+                  onClick={openModal}
+                  className="bg-[#F43F5E] px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053] block mb-1"
+                >
                   Update Profile
                 </button>
                 <button className="bg-[#F43F5E] px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053]">
@@ -55,6 +70,13 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      <Modal
+        modalTitle="Update Profile"
+        isOpen={modalOpen}
+        onClose={closeModal}
+      >
+        <ProfileForm onClose={closeModal}></ProfileForm>
+      </Modal>
     </div>
   );
 };

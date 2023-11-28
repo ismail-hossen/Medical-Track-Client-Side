@@ -90,7 +90,7 @@ const PaymentForm = ({ regCampInfo, onClose, fetch }) => {
         onClose();
         fetch();
         Swal.fire(
-          `Payment success for joining in the camp. Please wait for approval.Your TrxId: ${paymentIntent.id}`
+          `Payment success for joining in the camp. Please wait for approval. Your TrxId: ${paymentIntent.id}`
         );
       } catch (error) {
         Swal.fire({
