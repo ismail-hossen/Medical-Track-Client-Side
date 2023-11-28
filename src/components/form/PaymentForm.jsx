@@ -77,6 +77,7 @@ const PaymentForm = ({ regCampInfo, onClose, fetch }) => {
           campName: regCampInfo.camp.campName,
           campFees: regCampInfo.camp.campFees,
         },
+        email: user.email,
         transactionId: paymentIntent.id,
         date: new Date(),
       };

@@ -34,7 +34,7 @@ const SignUp = () => {
               const userInfo = {
                 name: data.fullName,
                 email: data.email,
-                role: "participant",
+                role: data.role.toLowerCase(),
               };
               axiosPublic.post("/users", userInfo).then((res) => {
                 if (res.status == 201) {
@@ -113,6 +113,14 @@ const SignUp = () => {
                 <span className="text-red-600">{confirmPass}</span>
               )}
             </div>
+            <select
+              {...register("role", { required: true })}
+              className="select select-bordered select-sm w-full max-w-xs mb-6 focus:outline-none focus:border-blue-500"
+            >
+              <option selected>Participant</option>
+              <option>Organizer</option>
+              <option>Professional</option>
+            </select>
             <button
               type="submit"
               className="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition duration-300"

@@ -26,16 +26,21 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        axiosSecure.get(`users/${user.email}`).then((res) => {
-          setUserRole(res.data.role);
-        });
+        axiosSecure
+          .get(`users/${user.email}`)
+          .then((res) => {
+            setUserRole(res.data.role);
+          })
+          .catch(() => {
+            setLoading(true);
+          });
       } else {
         setUser(null);
       }
       setLoading(false);
     });
     return () => unsubscribe();
-  }, [axiosSecure]);
+  }, [axiosSecure, loading]);
 
   const createUser = (email, password) => {
     setLoading(true);
