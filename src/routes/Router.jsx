@@ -12,11 +12,16 @@ import RegisteredCamps from "../pages/dashboard/participant/RegisteredCamps";
 import PaymentHistory from "../pages/dashboard/participant/PaymentHistory";
 import Profile from "../pages/dashboard/Profile";
 import PrivateRoute from "./PrivateRoute";
+import NotFound from "../pages/NotFound";
+import AvailableCamps from "../pages/AvailableCamps";
+import OrgPRoute from "./OrgPRoute";
+import PartiPrivRoute from "./PartiPrivRoute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/",
@@ -40,20 +45,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "available-camps",
-        element: <h1>available camps</h1>,
+        element: (
+          <PrivateRoute>
+            <AvailableCamps />
+          </PrivateRoute>
+        ),
       },
     ],
   },
   {
     path: "dashboard",
     element: <Dashboard />,
+    errorElement: <NotFound />,
     children: [
       // organizer routes
       {
         path: "manage-camps",
         element: (
           <PrivateRoute>
-            <ManageCamps />
+            <OrgPRoute>
+              <ManageCamps />
+            </OrgPRoute>
           </PrivateRoute>
         ),
       },
@@ -61,7 +73,9 @@ export const router = createBrowserRouter([
         path: "add-a-camp",
         element: (
           <PrivateRoute>
-            <AddACamp />
+            <OrgPRoute>
+              <AddACamp />
+            </OrgPRoute>
           </PrivateRoute>
         ),
       },
@@ -69,7 +83,9 @@ export const router = createBrowserRouter([
         path: "manage-registered-camps",
         element: (
           <PrivateRoute>
-            <ManageRegisteredCamps />
+            <OrgPRoute>
+              <ManageRegisteredCamps />
+            </OrgPRoute>
           </PrivateRoute>
         ),
       },
@@ -86,7 +102,9 @@ export const router = createBrowserRouter([
         path: "registered-camps",
         element: (
           <PrivateRoute>
-            <RegisteredCamps />
+            <PartiPrivRoute>
+              <RegisteredCamps />
+            </PartiPrivRoute>
           </PrivateRoute>
         ),
       },
@@ -94,13 +112,21 @@ export const router = createBrowserRouter([
         path: "payment-history",
         element: (
           <PrivateRoute>
-            <PaymentHistory />
+            <PartiPrivRoute>
+              <PaymentHistory />
+            </PartiPrivRoute>
           </PrivateRoute>
         ),
       },
       {
         path: "feedback-and-ratings",
-        element: <h3>feedback-and-ratings</h3>,
+        element: (
+          <PrivateRoute>
+            <PartiPrivRoute>
+              <h3>feedback-and-ratings</h3>,
+            </PartiPrivRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "participant-profile",

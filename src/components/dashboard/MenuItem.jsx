@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const MenuItem = ({ label, address, icon: Icon }) => {
+const MenuItem = ({ label, address, icon: Icon, image }) => {
   return (
     <NavLink
       to={address}
@@ -11,7 +11,15 @@ const MenuItem = ({ label, address, icon: Icon }) => {
         }`
       }
     >
-      <Icon className="w-5 h-5" />
+      {image ? (
+        <div className="avatar">
+          <div className="w-6 h-6 rounded-full">
+            <img src={image} />
+          </div>
+        </div>
+      ) : (
+        <Icon className="w-5 h-5" />
+      )}
 
       <span className="mx-4 font-medium">{label}</span>
     </NavLink>

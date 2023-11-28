@@ -59,7 +59,10 @@ function Header() {
         {user ? (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <Link to="/dashboard" className="btn-circle avatar">
+              <Link
+                to="/dashboard"
+                className="btn-circle avatar items-center justify-center"
+              >
                 {user?.photoURL ? (
                   <img
                     alt="User Photo"
@@ -67,7 +70,9 @@ function Header() {
                     src={user.photoURL}
                   />
                 ) : (
-                  <FaUserCircle className="text-3xl" />
+                  <div className="w-5/6">
+                    <FaUserCircle className="w-full h-full" />
+                  </div>
                 )}
               </Link>
             </label>

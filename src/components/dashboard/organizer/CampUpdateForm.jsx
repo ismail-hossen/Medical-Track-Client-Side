@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const CampUpdateForm = ({ camp, fetch, onClose }) => {
   const [loading, setLoading] = useState(false);
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
 
   const {
     register,
@@ -31,7 +33,7 @@ const CampUpdateForm = ({ camp, fetch, onClose }) => {
     const imageString = data.image.length > 0 ? data.image[0] : image;
     const imageData = new FormData();
     imageData.append("image", imageString);
-    axiosSecure
+    axiosPublic
       .post(
         `https://api.imgbb.com/1/upload?key=${
           import.meta.env.VITE_imageBB_api_key

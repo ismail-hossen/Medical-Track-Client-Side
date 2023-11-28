@@ -2,14 +2,14 @@ import { useContext, useState } from "react";
 import { GrLogout } from "react-icons/gr";
 import { AiOutlineBars } from "react-icons/ai";
 import OrganizerMenu from "./organizer/OrganizerMenu";
-import OrganizerProfile from "./organizer/OrganizerProfile";
 import { ThemeContext } from "../../authContext/AuthContext";
-import ParticipantProfile from "./participant/ParticipantProfile";
 import ParticipantMenu from "./menu/ParticipantMenu";
 import { Link, useNavigate } from "react-router-dom";
+import MenuItem from "./MenuItem";
+import { CgProfile } from "react-icons/cg";
 
 const Sidebar = () => {
-  const { userRole, logout } = useContext(ThemeContext);
+  const { userRole, logout, user } = useContext(ThemeContext);
   const [isActive, setActive] = useState(false);
   const navigate = useNavigate();
 
@@ -66,8 +66,30 @@ const Sidebar = () => {
         </div>
         <div>
           <hr />
-          {userRole == "organizer" && <OrganizerProfile />}
-          {userRole == "participant" && <ParticipantProfile />}
+          {userRole == "organizer" && (
+            <MenuItem
+              image={user?.photoURL}
+              icon={CgProfile}
+              label="Profile"
+              address="/dashboard/organizer-profile"
+            />
+          )}
+          {userRole == "participant" && (
+            <MenuItem
+              image={user?.photoURL}
+              icon={CgProfile}
+              label="Profile"
+              address="/dashboard/participant-profile"
+            />
+          )}
+          {userRole == "professional" && (
+            <MenuItem
+              image={user?.photoURL}
+              label="Profile"
+              address="/dashboard/professional-profile"
+              icon={CgProfile}
+            />
+          )}
           <button
             onClick={handleLogout}
             className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform"

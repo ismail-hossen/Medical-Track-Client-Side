@@ -24,8 +24,16 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      const userEmail = user?.email;
+      const currentUser = { email: userEmail };
       if (user) {
         setUser(user);
+        axiosSecure
+          .post("/jwt", currentUser, { withCredentials: true })
+          .then((res) => {
+            console.log("token response", res.data);
+          });
+
         axiosSecure
           .get(`users/${user.email}`)
           .then((res) => {
@@ -36,6 +44,13 @@ const AuthProvider = ({ children }) => {
           });
       } else {
         setUser(null);
+        axiosSecure
+          .post("/logout", currentUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data);
+          });
       }
       setLoading(false);
     });

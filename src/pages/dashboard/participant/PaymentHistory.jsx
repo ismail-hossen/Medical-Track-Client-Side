@@ -22,7 +22,7 @@ const PaymentHistory = () => {
   return (
     <>
       <Helmet>
-        <title>Medical Track | Manage Camps</title>
+        <title>Payment History</title>
       </Helmet>
 
       <div className="container mx-auto px-4 sm:px-8">

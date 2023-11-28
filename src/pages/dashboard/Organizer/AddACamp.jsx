@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useContext, useState } from "react";
 import { ThemeContext } from "../../../authContext/AuthContext";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const AddACamp = () => {
   const [loading, setLoading] = useState(false);
@@ -15,12 +16,13 @@ const AddACamp = () => {
     formState: { errors },
   } = useForm();
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
 
   const onSubmit = (data) => {
     setLoading(true);
     const imageData = new FormData();
     imageData.append("image", data?.image[0]);
-    axiosSecure
+    axiosPublic
       .post(
         `https://api.imgbb.com/1/upload?key=${
           import.meta.env.VITE_imageBB_api_key
@@ -50,7 +52,7 @@ const AddACamp = () => {
                 Swal.fire({
                   position: "top-end",
                   icon: "success",
-                  title: "Your created camp saved",
+                  title: "Saved your created camp",
                   showConfirmButton: false,
                   timer: 2000,
                 });

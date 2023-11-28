@@ -3,9 +3,11 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useContext } from "react";
 import { ThemeContext } from "../../authContext/AuthContext";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const ProfileForm = ({ onClose }) => {
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const { updateUserProfile, user, setLoading } = useContext(ThemeContext);
   const {
     register,
@@ -16,7 +18,7 @@ const ProfileForm = ({ onClose }) => {
   const onSubmit = (data) => {
     const imageData = new FormData();
     imageData.append("image", data?.image[0]);
-    axiosSecure
+    axiosPublic
       .post(
         `https://api.imgbb.com/1/upload?key=${
           import.meta.env.VITE_imageBB_api_key
