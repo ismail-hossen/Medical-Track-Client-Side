@@ -25,7 +25,7 @@ const Testimonials = () => {
           ) : (
             data?.data?.map((testimonial) => (
               <div
-                key={testimonial.id}
+                key={testimonial._id}
                 className="bg-white rounded-md shadow-md p-6"
               >
                 <p className="text-gray-600 mb-4">{testimonial.comment}</p>

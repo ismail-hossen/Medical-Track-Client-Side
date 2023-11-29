@@ -3,25 +3,18 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { ThemeContext } from "../../../authContext/AuthContext";
-import Modal from "../../modals/Modal";
+import { useNavigate } from "react-router-dom";
 
 const JoinCampForm = ({ camp, onClose }) => {
   const [loading, setLoading] = useState(false);
   const { user } = useContext(ThemeContext);
   const axiosSecure = useAxiosSecure();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+  console.log(navigate);
 
   const { campName, location, campFees, professionals, _id, dateTime, author } =
     camp || {};
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
 
   const onSubmit = (data) => {
     setLoading(true);
@@ -55,7 +48,7 @@ const JoinCampForm = ({ camp, onClose }) => {
           });
         }
         setLoading(false);
-        openModal();
+        navigate("/dashboard/registered-camps");
       })
       .catch(() => {
         Swal.fire({
@@ -177,11 +170,6 @@ const JoinCampForm = ({ camp, onClose }) => {
           Join Camp & Continue
         </button>
       </form>
-      <Modal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        modalTitle="Payment"
-      ></Modal>
     </div>
   );
 };
