@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
 import { GrLogout } from "react-icons/gr";
 import { AiOutlineBars } from "react-icons/ai";
-import OrganizerMenu from "./organizer/OrganizerMenu";
 import { ThemeContext } from "../../authContext/AuthContext";
+import OrganizerMenu from "./organizer/OrganizerMenu";
+import ProfessionalMenu from "./professional/ProfessionalMenu";
 import ParticipantMenu from "./menu/ParticipantMenu";
 import { Link, useNavigate } from "react-router-dom";
 import MenuItem from "./MenuItem";
@@ -61,6 +62,7 @@ const Sidebar = () => {
             <nav>
               {userRole == "organizer" && <OrganizerMenu />}
               {userRole == "participant" && <ParticipantMenu />}
+              {userRole == "professional" && <ProfessionalMenu />}
             </nav>
           </div>
         </div>

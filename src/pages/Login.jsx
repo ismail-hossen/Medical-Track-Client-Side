@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../authContext/AuthContext";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
@@ -76,9 +76,9 @@ const Login = () => {
           </form>
           <p className="text-sm text-gray-600 mt-4 text-center">
             Don&apos;t have an account?{" "}
-            <a href="#" className="text-blue-500 hover:underline">
+            <Link to="/signup" className="text-blue-500 hover:underline">
               Sign Up
-            </a>
+            </Link>
           </p>
         </div>
       </div>

@@ -17,6 +17,8 @@ import AvailableCamps from "../pages/AvailableCamps";
 import OrgPRoute from "./OrgPRoute";
 import PartiPrivRoute from "./PartiPrivRoute";
 import FeedAndRatings from "../pages/dashboard/participant/FeedAndRatings";
+import AddUpcomingCamp from "../pages/dashboard/Organizer/AddUpcomingCamp";
+import AcceptedCamps from "../pages/dashboard/professional/AcceptedCamps";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +93,26 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "add-upcoming-camp",
+        element: (
+          <PrivateRoute>
+            <OrgPRoute>
+              <AddUpcomingCamp />
+            </OrgPRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "manage-upcoming-camps",
+        element: (
+          <PrivateRoute>
+            <OrgPRoute>
+              <h3> Manage Upcoming camps</h3>
+            </OrgPRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "organizer-profile",
         element: (
           <PrivateRoute>
@@ -143,6 +165,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "accepted-camps",
+        element: (
+          <PrivateRoute>
+            <AcceptedCamps />
           </PrivateRoute>
         ),
       },

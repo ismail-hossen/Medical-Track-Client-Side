@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ThemeContext } from "../authContext/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 import useAxiosPublic from "../hooks/useAxiosPublic";
@@ -133,9 +133,9 @@ const SignUp = () => {
           </form>
           <p className="text-sm text-gray-600 mt-4 text-center">
             Already have an account?{" "}
-            <a href="#" className="text-blue-500 hover:underline">
+            <Link to="/login" className="text-blue-500 hover:underline">
               Log in
-            </a>
+            </Link>
           </p>
         </div>
       </div>

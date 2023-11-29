@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../authContext/AuthContext";
 import ManageCamps from "../pages/dashboard/Organizer/ManageCamps";
 import RegisteredCamps from "../pages/dashboard/participant/RegisteredCamps";
-import Profile from "../pages/dashboard/Profile";
+import AcceptedCamps from "../pages/dashboard/professional/AcceptedCamps";
 
 const Dashboard = () => {
   const { userRole } = useContext(ThemeContext);
@@ -22,7 +22,7 @@ const Dashboard = () => {
             <RegisteredCamps />
           )}
           {location?.pathname == "/dashboard" && userRole == "professional" && (
-            <Profile />
+            <AcceptedCamps />
           )}
           <Outlet />
         </div>
