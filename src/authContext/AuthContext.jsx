@@ -27,6 +27,7 @@ const AuthProvider = ({ children }) => {
       const userEmail = user?.email;
       const currentUser = { email: userEmail };
       if (user) {
+        localStorage.setItem("authenticated", "true");
         setUser(user);
         axiosSecure
           .post("/jwt", currentUser, { withCredentials: true })
@@ -44,6 +45,7 @@ const AuthProvider = ({ children }) => {
           });
       } else {
         setUser(null);
+        localStorage.clear("authenticated");
         axiosSecure
           .post("/logout", currentUser, {
             withCredentials: true,

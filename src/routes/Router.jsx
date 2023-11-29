@@ -16,6 +16,7 @@ import NotFound from "../pages/NotFound";
 import AvailableCamps from "../pages/AvailableCamps";
 import OrgPRoute from "./OrgPRoute";
 import PartiPrivRoute from "./PartiPrivRoute";
+import FeedAndRatings from "../pages/dashboard/participant/FeedAndRatings";
 
 export const router = createBrowserRouter([
   {
@@ -123,7 +124,7 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <PartiPrivRoute>
-              <h3>feedback-and-ratings</h3>,
+              <FeedAndRatings />
             </PartiPrivRoute>
           </PrivateRoute>
         ),

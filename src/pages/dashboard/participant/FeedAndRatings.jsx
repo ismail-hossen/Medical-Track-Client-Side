@@ -3,32 +3,34 @@ import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../../authContext/AuthContext";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import THeadCols from "../../../components/table/THeadCols";
-import RegCampTRow from "../../../components/table/RegCampTRow";
+import FeedbackTRow from "../../../components/dashboard/participant/FeedbackTRow";
 
-const RegisteredCamps = () => {
+const FeedAndRatings = () => {
   const axiosSecure = useAxiosSecure();
   const tHeadData = [
     "Camp Name",
     "Date and Time",
     "Location",
-    "campFees",
-    "Confirmation Status",
+    "CampFees",
     "Payment Status",
+    "Confirmation Status",
     "Action",
   ];
   const { user } = useContext(ThemeContext);
   const [camps, setCamps] = useState([]);
   const [reFetch, setReFetch] = useState(false);
   useEffect(() => {
-    axiosSecure
-      .get(`/reg-camps/${user.email}`)
-      .then((data) => setCamps(data.data));
-  }, [reFetch]);
+    if (user) {
+      axiosSecure
+        .get(`/completed-reg-camps/${user.email}`)
+        .then((data) => setCamps(data.data));
+    }
+  }, [user, reFetch]);
 
   return (
     <>
       <Helmet>
-        <title>Registered Camps</title>
+        <title>Medical Track | Feedback and Ratings</title>
       </Helmet>
 
       <div className="container mx-auto px-4 sm:px-8">
@@ -44,7 +46,7 @@ const RegisteredCamps = () => {
                 <tbody>
                   {camps?.length > 0
                     ? camps.map((camp) => (
-                        <RegCampTRow
+                        <FeedbackTRow
                           key={camp._id}
                           fetch={() => setReFetch((f) => !f)}
                           data={camp}
@@ -61,4 +63,4 @@ const RegisteredCamps = () => {
   );
 };
 
-export default RegisteredCamps;
+export default FeedAndRatings;
