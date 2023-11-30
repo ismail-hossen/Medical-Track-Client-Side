@@ -3,12 +3,12 @@ import { ThemeContext } from "../../authContext/AuthContext";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 
-function Header() {
+function Header({ className }) {
   const { user } = useContext(ThemeContext);
   const NavItems = (
     <>
       <li>
-        <a>Home</a>
+        <Link to="/home">Home</Link>
       </li>
       {user?.email && (
         <li>
@@ -22,7 +22,7 @@ function Header() {
   );
 
   return (
-    <div className="navbar bg-base-100">
+    <div className={`${className} navbar bg-base-100`}>
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
