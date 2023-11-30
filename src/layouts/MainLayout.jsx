@@ -7,12 +7,12 @@ const MainLayout = () => {
   const location = useLocation();
   return (
     <>
-      <Header className="w-full max-w-[1400px] mx-auto" />
+      <Header className="container mx-auto" />
       {(location?.pathname == "/home" || location?.pathname == "/") && (
         <Banner />
       )}
-      <Outlet className="w-full max-w-[1400px] mx-auto" />
-      <Footer className="w-full max-w-[1400px] mx-auto" />
+      <Outlet />
+      <Footer className="container mx-auto" />
     </>
   );
 };

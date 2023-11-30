@@ -40,14 +40,14 @@ const CampDetails = () => {
   const { userRole } = useContext(ThemeContext);
 
   return (
-    <div className="bg-white shadow-md rounded-md p-4 mb-6">
+    <div className="container border border-b-0 border-base-200 mx-auto bg-white p-8 flex flex-col gap-3">
       <img
         src={image}
         alt={campName}
-        className="w-full h-48 object-cover mb-4 rounded-md"
+        className="w-full h-96 object-cover mb-4 rounded-md"
       />
 
-      <h2 className="text-lg font-semibold mb-2">{name}</h2>
+      <h2 className="text-3xl font-semibold">{campName}</h2>
 
       <p>
         <span className="font-semibold">Camp Fees:</span> {campFees}
